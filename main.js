@@ -8,9 +8,12 @@ let ahorro = [];
 
 
 function calcularMontoDisponible() {
-  let ingresoTotal = parseFloat(prompt("Ingrese su salario mensual:"));
-  return ingresoTotal;
-
+    let ingresoTotal;
+    do{
+  ingresoTotal = parseFloat(prompt("Ingrese su salario mensual:"));
+    } while (isNaN(ingresoTotal) || ingresoTotal <= 0);
+    return ingresoTotal;  
+  
 }
 
 // Pide el salario mensual una sola vez y asigna el valor a montoDisponible
@@ -40,9 +43,32 @@ function Ahorro(monto, objetivo, fechaMeta) {
 
 
 function ingresarIngresosExtra() {
-  let montoExtra = parseFloat(prompt("Ingrese el monto de ingreso extra:"));
-  let trabajo = prompt("Ingrese el nombre del trabajo realizado:");
-  let fechaCobro = prompt("Ingrese la fecha de cobro:");
+    let montoExtra;
+    do {
+      montoExtra = parseFloat(prompt("Ingrese el monto de ingreso extra:"));
+    } while (isNaN(montoExtra) || montoExtra <= 0);
+
+    let trabajo;
+    do {
+      trabajo = prompt("Ingrese el nombre del trabajo realizado:");
+      if (!trabajo || !isNaN(trabajo)) {
+        alert("Los datos ingresados son incorrectos. Por favor, ingrese el nombre del trabajo.");
+      }
+    } while (!trabajo || !isNaN(trabajo));
+
+
+    let fechaCobro;
+    do {
+      fechaCobro = prompt("Ingrese la fecha de cobro, por ejemplo, dd/mm/aa:");
+      if (fechaCobro === null || fechaCobro.match(/^\d{1,2}[/-]\d{1,2}[/-]\d{4}$/)) {
+        break; // Si la entrada es válida, sale del bucle
+      } else {
+        alert("Lo siento, ingresa la fecha en formato numérico");
+      }
+    } while (true);
+    
+    
+    
 
   let ingreso = new Ingreso(montoExtra, trabajo, fechaCobro);
   ingresos.push(ingreso); 
@@ -57,9 +83,37 @@ function ingresarIngresosExtra() {
 }
 
 function ingresarEgresosFijos() {
-  let monto = parseFloat(prompt("Ingrese el monto de egresos fijos:"));
-  let concepto = prompt("Ingrese el concepto de egresos fijos:");
-  let fechaVencimiento = prompt("Ingrese la fecha de vencimiento:");
+    let monto;
+    do {
+      monto = parseFloat(prompt("Ingrese el monto de egresos fijos:"));
+    } while (isNaN(monto) || monto <= 0); // Se asegura de que monto sea un número positivo
+  
+    let concepto;
+    do {
+      concepto = prompt("Ingrese el concepto de egresos fijos, por ejemplo, alquiler o servicios:");
+      if (concepto === null || !isNaN(concepto)) {
+        alert("Por favor, escribe los conceptos de tus egresos.");
+      } else {
+        break; 
+      }
+    } while (true);
+    
+    
+    let fechaVencimiento;
+do {
+  fechaVencimiento = prompt("Ingrese la fecha de vencimiento mas cercana del egreso fijo que abonara:");
+  
+  if (!fechaVencimiento) {
+    alert("Lo siento, el campo de fecha no puede estar vacío.");
+  } else if (!/^\d{1,2}[/-]\d{1,2}[/-]\d{4}$/.test(fechaVencimiento)) {
+    alert("Lo siento, ingresa la fecha en formato numérico (dd/mm/aa).");
+  } else {
+    break;
+  }
+} while (true);
+
+
+
 
   let egreso = new Egreso(monto, concepto, fechaVencimiento);
   egresosFijos.push(egreso);
@@ -74,9 +128,30 @@ function ingresarEgresosFijos() {
 }
 
 function ingresarEgresosVariables() {
-  let monto = parseFloat(prompt("Ingrese el monto de egresos variables:"));
-  let descripción = prompt("Ingrese la descripción de egresos variables:");
-  let fecha = prompt("Ingrese la fecha de egresos variables:");
+    let monto;
+  do {
+    monto = parseFloat(prompt("Ingrese el monto de egresos variables:"));
+  } while (isNaN(monto) || monto <= 0); // Se asegura de que monto sea un número positivo
+
+  let descripción;
+  do {
+    descripción = prompt("Ingrese la descripción de egresos variables:");
+    if (descripción === null) {
+      alert("Has cancelado la entrada. Por favor, ingrese una descripción válida.");
+    } else if (descripción === "") {
+      alert("La descripción es un campo requerido. Por favor, ingrésela.");
+    } else if (!isNaN(descripción)) {
+      alert("Por favor, ingrese una descripción válida (texto).");
+    }
+  } while (descripción === null || descripción === "" || !isNaN(descripción));
+  
+  
+
+  let fecha = prompt("Ingrese la fecha de compra de su gasto variable mas alto:");
+  if (!fecha) {
+    console.log("Fecha es un campo requerido.");
+    return;
+  }
 
   let egreso = new Egreso(monto, descripción, fecha);
   egresosVariables.push(egreso); // Agregar el egreso al array de egresos variables
@@ -91,9 +166,31 @@ function ingresarEgresosVariables() {
 }
 
 function ingresarAhorro() {
-  let monto = parseFloat(prompt("Ingrese el monto de ahorro:"));
-  let objetivo = prompt("Ingrese el objetivo de ahorro:");
-  let fechaMeta = prompt("Ingrese la fecha de meta de ahorro:");
+    let monto;
+    do {
+      monto = parseFloat(prompt("Ingrese el monto de ahorro:"));
+    } while (isNaN(monto) || monto <= 0); // Se asegura de que monto sea un número positivo
+  
+    let objetivo;
+    do {
+      objetivo = prompt("Ingrese el objetivo de ahorro:");
+      if (objetivo === null) {
+        alert("Has cancelado la entrada. Por favor, ingrese un objetivo válido.");
+      } else if (objetivo === "") {
+        alert("El objetivo es un campo requerido. Por favor, ingréselo.");
+      } else if (!isNaN(objetivo)) {
+        alert("Por favor, ingrese un objetivo válido (texto).");
+      }
+    } while (objetivo === null || objetivo === "" || !isNaN(objetivo));
+    
+    // Continúa con el objetivo válido.
+    
+  
+    let fechaMeta = prompt("Ingrese la fecha de meta de ahorro:");
+    if (!fechaMeta) {
+      console.log("Fecha de Meta es un campo requerido.");
+      return;
+    }
 
   let ahorroObj = new Ahorro(monto, objetivo, fechaMeta);
   ahorro.push(ahorroObj); 
@@ -158,3 +255,5 @@ function main() {
 }
 
 main();
+
+
