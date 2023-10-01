@@ -7,6 +7,20 @@ let egresosVariables = [];
 let ahorro = [];
 
 
+// Función para mostrar el formulario después de calcular el monto disponible
+function mostrarFormulario() {
+  document.getElementById('ingreso-mensual').style.display = 'none';
+  document.getElementById('formulario').style.display = 'block';
+}
+
+// Manejar el botón "Calcular Monto Disponible"
+document.getElementById('calcular-monto').addEventListener('click', () => {
+  const montoDisponible = calcularMontoDisponible();
+  console.log("Monto total:", montoDisponible);
+  mostrarFormulario(); // Mostrar el formulario después de calcular el monto
+});
+
+
 function calcularMontoDisponible() {
     let ingresoTotal;
     do{
