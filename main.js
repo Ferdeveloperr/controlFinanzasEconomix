@@ -26,9 +26,10 @@ document.getElementById('calcular-monto').addEventListener('click', () => {
 
 function calcularMontoDisponible() {
     let ingresoTotal = document.getElementById("salario")
-    console.log(ingresoTotal.value)
- 
+    ingresoTotal = ingresoTotal.value
 }
+
+// REPLICAR Y SUSTITUIR RESTO DE INPUTS
 
 // Pide el salario mensual una sola vez y asigna el valor a montoDisponible
 montoDisponible = calcularMontoDisponible();
@@ -57,29 +58,19 @@ function Ahorro(monto, objetivo, fechaMeta) {
 
 
 function ingresarIngresosExtra() {
-    let montoExtra;
-    do {
-      montoExtra = parseFloat(prompt("Ingrese el monto de ingreso extra:"));
-    } while (isNaN(montoExtra) || montoExtra <= 0);
 
-    let trabajo;
+    let montoExtra = document.getElementById("monto-extra")
+    console.log(montoExtra.value)
+
+
+    let trabajo = document.getElementById("trabajo-extra") 
     do {
-      trabajo = prompt("Ingrese el nombre del trabajo realizado:");
-      if (!trabajo || !isNaN(trabajo)) {
-        alert("Los datos ingresados son incorrectos. Por favor, ingrese el nombre del trabajo.");
-      }
+      trabajo;
     } while (!trabajo || !isNaN(trabajo));
 
 
-    let fechaCobro;
-    do {
-      fechaCobro = prompt("Ingrese la fecha de cobro, por ejemplo, dd/mm/aa:");
-      if (fechaCobro === null || fechaCobro.match(/^\d{1,2}[/-]\d{1,2}[/-]\d{4}$/)) {
-        break; // Si la entrada es válida, sale del bucle
-      } else {
-        alert("Lo siento, ingresa la fecha en formato numérico");
-      }
-    } while (true);
+    let fechaCobro = document.getElementById("fecha-cobro-extra")
+    
     
     
     
@@ -88,6 +79,27 @@ function ingresarIngresosExtra() {
   ingresos.push(ingreso); 
 
   montoDisponible += montoExtra; // Sumar el monto ingresado al disponible
+
+  function ingresarIngresosExtra(){
+  
+  let montoExtra = document.getElementById("monto-extra")
+  let trabajo = document.getElementById("trabajo-extra")
+  let fechaCobro = document.getElementById("fechaCobro")
+
+  const ingreso = new Ingreso(montoExtra.value, trabajo.value, fechaCobro.value)
+  console.log(ingresarIngresosExtra)
+    return;
+  
+  }
+
+  // let btnIngreso = document.getElementById("ingresar-ingreso-extra")
+  // btnIngreso.addEventListener("click", () =>{
+  //   montoDisponible += montoExtra;
+  //   console.log(ingreso.value)
+  //   console.log(montoDisponible)
+  // } )  
+
+
 
   console.log("Ingreso registrado:");
   console.log("Monto extra:", montoExtra);
@@ -238,24 +250,24 @@ function mostrarResumen() {
 //       case 1:
 //         ingresarIngresosExtra();
 //         break;
-//       case 2:
-//         ingresarEgresosFijos();
-//         break;
-//       case 3:
-//         ingresarEgresosVariables();
-//         break;
-//       case 4:
-//         ingresarAhorro();
-//         break;
-//       case 5:
-//         console.log("Finalizando el programa.");
-//         mostrarResumen();
-//         break;
-//       default:
-//         console.log("Opción no válida. Inténtelo de nuevo.");
-//     }
+      // case 2:
+      //   ingresarEgresosFijos();
+      //   break;
+      // case 3:
+      //   ingresarEgresosVariables();
+      //   break;
+      // case 4:
+      //   ingresarAhorro();
+      //   break;
+    //   case 5:
+    //     console.log("Finalizando el programa.");
+    //     mostrarResumen();
+    //     break;
+    //   default:
+    //     console.log("Opción no válida. Inténtelo de nuevo.");
+    // }
 
-//     // creamos el bucle while y los condicionales necesarios en caso de que el usuario le quede saldo a favor, quede en 0 y si queda en negativo
+    // creamos el bucle while y los condicionales necesarios en caso de que el usuario le quede saldo a favor, quede en 0 y si queda en negativo
 
 //   } while (opcion !== 5 && montoDisponible > 0);
 
@@ -284,5 +296,19 @@ botonAceptar.addEventListener('click', function() {
 
     // Actualiza el contenido del elemento con la información capturada
     resultadoDiv.textContent = `Salario Mensual: ${salarioMensual}, Nombre del Usuario: ${nombreUsuario}`;
+});
+
+
+// let ingresaExtra = document.getElementById("ingresar-ingreso-extra")
+// console.log(ingresaExtra)
+// ingresaExtra.addEventListener("change", () =>{
+//   console.log("detecto cambio")
+// } )
+
+
+
+document.getElementById('finalizar-btn').addEventListener('click', () => {
+  
+  mostrarResumen(); // Mostrar el formulario después de calcular el monto
 });
 
