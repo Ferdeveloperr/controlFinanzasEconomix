@@ -7,22 +7,39 @@
     <title>Control de Finanzas Economix</title>
 </head>
 <body>
+
     <header>
-        <h1>Control de Finanzas Economix</h1>
+        <h1>Control de Finanzas Economix</h1> 
     </header>
     <main>
-        <div id="ingreso-mensual">
+
+
+    <!-- poner dos campos de formulario que sean para: poner el nombre del usuario
+    luego capturarlo y mostrarlo en pantalla cuando se acceda a la pagina principal
+
+        el otro para poner el monto el cual se gana mensualmmente y eso mostrarlo en pantalla como ingreso princpal-->
+
+
+
+        <div id="ingreso-mensual"> 
             <h2>Ingresa tu salario mensual:</h2>
             <input type="number" id="salario" placeholder="Ingrese su salario mensual">
-            <button id="calcular-monto">Calcular Monto Disponible</button>
+            <h2>
+                <input type="text" id="nombreUsuario" placeholder="Ingrese su nombre">
+            </h2>
+            <button id="calcular-monto">Aceptar</button>
         </div>
 
-            <!-- formulario para el ingreso de datos del usuario -->
+
+        <div id="resultado"></div> 
+
+
+            <!-- formulario para el ingreso de datos del usuario, falta agregarle iconos a cada titulo -->
 
         <div id="formulario" style="display: none;">
             <form id="finanzas-form">
                 <h2>Ingrese Ingreso Extra</h2>
-                <label for="monto-extra">Monto Extra:</label>
+                <label for="monto-extra ">Monto Extra:</label>
                 <input type="number" id="monto-extra" placeholder="Ingrese el monto de ingreso extra">
                 <label for="trabajo-extra">Trabajo Realizado:</label>
                 <input type="text" id="trabajo-extra" placeholder="Ingrese el nombre del trabajo realizado">

@@ -53,6 +53,13 @@ button {
     cursor: pointer;
 }
 
+#resultado {
+    display: flex;
+    text-align: center;
+    font-size: 25px;
+    color: blue;
+}
+
 #dark-mode-toggle {
     background-color: #333; /* Color de fondo gris oscuro */
     color: white;
