@@ -312,3 +312,5 @@ document.getElementById('finalizar-btn').addEventListener('click', () => {
   mostrarResumen(); // Mostrar el formulario después de calcular el monto
 });
 
+
+
