@@ -7,29 +7,9 @@ let egresosVariables = [];
 let ahorro = [];
 
 
-// Función para mostrar el formulario después de calcular el monto disponible
-
-function mostrarFormulario() {
-  document.getElementById('ingreso-mensual').style.display = 'none';
-  document.getElementById('formulario').style.display = 'block';
-}
-
-// Manejar el botón "Calcular Monto Disponible"
-document.getElementById('calcular-monto').addEventListener('click', () => {
-  const montoDisponible = calcularMontoDisponible();
   
-  mostrarFormulario(); // Mostrar el formulario después de calcular el monto
-});
+  // REPLICAR Y SUSTITUIR RESTO DE INPUTS
 
-
-// capturo el id salario del formulario y muestro en pantalla como en consola el valor del input ingresado en el formulario
-
-function calcularMontoDisponible() {
-    let ingresoTotal = document.getElementById("salario")
-    ingresoTotal = ingresoTotal.value
-}
-
-// REPLICAR Y SUSTITUIR RESTO DE INPUTS
 
 // Pide el salario mensual una sola vez y asigna el valor a montoDisponible
 montoDisponible = calcularMontoDisponible();
@@ -57,183 +37,111 @@ function Ahorro(monto, objetivo, fechaMeta) {
 }
 
 
-function ingresarIngresosExtra() {
 
-    let montoExtra = document.getElementById("monto-extra")
-    console.log(montoExtra.value)
-
-
-    let trabajo = document.getElementById("trabajo-extra") 
-    do {
-      trabajo;
-    } while (!trabajo || !isNaN(trabajo));
+// let btnIngreso = document.getElementById("ingresar-ingreso-extra")
+// btnIngreso.addEventListener("click", () =>{
+//     montoDisponible += montoExtra;
+//     console.log(montoDisponible)
+//   } )  
 
 
-    let fechaCobro = document.getElementById("fecha-cobro-extra")
-    
-    
-    
-    
+// ---------PRIMER CAMPO DEL FORMULARIO----------------
 
-  let ingreso = new Ingreso(montoExtra, trabajo, fechaCobro);
-  ingresos.push(ingreso); 
+// Obtén los nodos de los campos de entrada y el botón "Finalizar" por sus IDs
+const montoExtraInput = document.getElementById('monto-extra');
+const trabajoExtraInput = document.getElementById('trabajo-extra');
+const fechaCobroExtraInput = document.getElementById('fecha-cobro-extra');
+const botonIngresoExtra = document.getElementById('ingresar-ingreso-extra');
 
-  montoDisponible += montoExtra; // Sumar el monto ingresado al disponible
+// Agrega un evento clic al botón "Finalizar"
+botonIngresoExtra.addEventListener('click', function() {
+    // Captura los valores de los campos de entrada
+    const montoExtra = montoExtraInput.value;
+    const trabajoRealizado = trabajoExtraInput.value;
+    const fechaCobro = fechaCobroExtraInput.value;
 
-  function ingresarIngresosExtra(){
-  
-  let montoExtra = document.getElementById("monto-extra")
-  let trabajo = document.getElementById("trabajo-extra")
-  let fechaCobro = document.getElementById("fechaCobro")
-
-  const ingreso = new Ingreso(montoExtra.value, trabajo.value, fechaCobro.value)
-  console.log(ingresarIngresosExtra)
-    return;
-  
-  }
-
-  // let btnIngreso = document.getElementById("ingresar-ingreso-extra")
-  // btnIngreso.addEventListener("click", () =>{
-  //   montoDisponible += montoExtra;
-  //   console.log(ingreso.value)
-  //   console.log(montoDisponible)
-  // } )  
-
-
-
-  console.log("Ingreso registrado:");
-  console.log("Monto extra:", montoExtra);
-  console.log("Trabajo:", trabajo);
-  console.log("Fecha de Cobro:", fechaCobro);
-  console.log("Monto Disponible:", montoDisponible);
-}
-
-function ingresarEgresosFijos() {
-    let monto;
-    do {
-      monto = parseFloat(prompt("Ingrese el monto de egresos fijos:"));
-    } while (isNaN(monto) || monto <= 0); // Se asegura de que monto sea un número positivo
-  
-    let concepto;
-    do {
-      concepto = prompt("Ingrese el concepto de egresos fijos, por ejemplo, alquiler o servicios:");
-      if (concepto === null || !isNaN(concepto)) {
-        alert("Por favor, escribe los conceptos de tus egresos.");
-      } else {
-        break; 
-      }
-    } while (true);
-    
-    
-    let fechaVencimiento;
-do {
-  fechaVencimiento = prompt("Ingrese la fecha de vencimiento mas cercana del egreso fijo que abonara:");
-  
-  if (!fechaVencimiento) {
-    alert("Lo siento, el campo de fecha no puede estar vacío.");
-  } else if (!/^\d{1,2}[/-]\d{1,2}[/-]\d{4}$/.test(fechaVencimiento)) {
-    alert("Lo siento, ingresa la fecha en formato numérico (dd/mm/aa).");
-  } else {
-    break;
-  }
-} while (true);
+    // Muestra los valores en la consola
+    console.log("Monto Extra:", montoExtra);
+    console.log("Trabajo Realizado:", trabajoRealizado);
+    console.log("Fecha de Cobro:", fechaCobro);
+});
 
 
 
 
-  let egreso = new Egreso(monto, concepto, fechaVencimiento);
-  egresosFijos.push(egreso);
 
-  montoDisponible -= monto; // Restar el monto ingresado al disponible
 
-  console.log("Egreso fijo registrado:");
-  console.log("Monto:", monto);
-  console.log("Concepto:", concepto);
-  console.log("Fecha de Vencimiento:", fechaVencimiento);
-  console.log("Monto Disponible:", montoDisponible);
-}
+// ------- SEGUNDO CAMPO DEL FORMULARIO -----------
 
-function ingresarEgresosVariables() {
-    let monto;
-  do {
-    monto = parseFloat(prompt("Ingrese el monto de egresos variables:"));
-  } while (isNaN(monto) || monto <= 0); // Se asegura de que monto sea un número positivo
+// Obtén los nodos de los campos de entrada y el botón "Finalizar" por sus IDs
+const montoFijoInput = document.getElementById('monto-fijo');
+const descripcionFijoInput = document.getElementById('concepto-fijo');
+const fechaFijoInput = document.getElementById('fecha-vencimiento-fijo');
+const EgresoFijo = document.getElementById('ingresar-egreso-fijo')
 
-  let descripción;
-  do {
-    descripción = prompt("Ingrese la descripción de egresos variables:");
-    if (descripción === null) {
-      alert("Has cancelado la entrada. Por favor, ingrese una descripción válida.");
-    } else if (descripción === "") {
-      alert("La descripción es un campo requerido. Por favor, ingrésela.");
-    } else if (!isNaN(descripción)) {
-      alert("Por favor, ingrese una descripción válida (texto).");
-    }
-  } while (descripción === null || descripción === "" || !isNaN(descripción));
-  
-  
+// Agrega un evento clic al botón "Finalizar"
+EgresoFijo.addEventListener('click', function() {
+    // Captura los valores de los campos de entrada
+    const montoFijo = montoFijoInput.value;
+    const descripcionFijo = descripcionFijoInput.value;
+    const fechaFijo = fechaFijoInput.value;
 
-  let fecha = prompt("Ingrese la fecha de compra de su gasto variable mas alto:");
-  if (!fecha) {
-    console.log("Fecha es un campo requerido.");
-    return;
-  }
+    // Muestra los valores en la consola
+    console.log("Monto Fijo:", montoFijo);
+    console.log("Descripción de Egreso Fijo:", descripcionFijo);
+    console.log("Fecha de Compra de Egreso Fijo:", fechaFijo);
+});
 
-  let egreso = new Egreso(monto, descripción, fecha);
-  egresosVariables.push(egreso); // Agregar el egreso al array de egresos variables
 
-  montoDisponible -= monto;
 
-  console.log("Egreso variable registrado:");
-  console.log("Monto:", monto);
-  console.log("Descripción:", descripción);
-  console.log("Fecha:", fecha);
-  console.log("Monto Disponible:", montoDisponible);
-}
+// -----------------------TERCER CAMPO DEL FORMULARIO--------------------
 
-function ingresarAhorro() {
-    let monto;
-    do {
-      monto = parseFloat(prompt("Ingrese el monto de ahorro:"));
-    } while (isNaN(monto) || monto <= 0); // Se asegura de que monto sea un número positivo
-  
-    let objetivo;
-    do {
-      objetivo = prompt("Ingrese el objetivo de ahorro:");
-      if (objetivo === null) {
-        alert("Has cancelado la entrada. Por favor, ingrese un objetivo válido.");
-      } else if (objetivo === "") {
-        alert("El objetivo es un campo requerido. Por favor, ingréselo.");
-      } else if (!isNaN(objetivo)) {
-        alert("Por favor, ingrese un objetivo válido (texto).");
-      }
-    } while (objetivo === null || objetivo === "" || !isNaN(objetivo));
-    
-    // Continúa con el objetivo válido.
-    
-  
-    let fechaMeta = prompt("Ingrese la fecha de meta de ahorro:");
-    if (!fechaMeta) {
-      console.log("Fecha de Meta es un campo requerido.");
-      return;
-    }
+// Obtén los nodos de los campos de entrada y el botón "Ingresar Egreso Variable" por sus IDs
+const montoVariableInput = document.getElementById('monto-variable');
+const descripcionVariableInput = document.getElementById('descripcion-variable');
+const fechaVariableInput = document.getElementById('fecha-variable');
+const botonIngresarEgresoVariable = document.getElementById('ingresar-egreso-variable');
 
-  let ahorroObj = new Ahorro(monto, objetivo, fechaMeta);
-  ahorro.push(ahorroObj); 
+// Agrega un evento clic al botón "Ingresar Egreso Variable"
+botonIngresarEgresoVariable.addEventListener('click', function() {
+    // Captura los valores de los campos de entrada
+    const montoVariable = montoVariableInput.value;
+    const descripcionVariable = descripcionVariableInput.value;
+    const fechaCompraVariable = fechaVariableInput.value;
 
-  montoDisponible -= monto;
+    // Muestra los valores en la consola
+    console.log("Monto Variable:", montoVariable);
+    console.log("Descripción de Egreso Variable:", descripcionVariable);
+    console.log("Fecha de Compra de Egreso Variable:", fechaCompraVariable);
+});
 
-  console.log("Ahorro registrado:");
-  console.log("Monto:", monto);
-  console.log("Objetivo:", objetivo);
-  console.log("Fecha de Meta:", fechaMeta);
-  console.log("Monto Disponible:", montoDisponible);
-}
+
+// ----------------------------CUARTO CAMPO DEL FORMULARIO------------------------------
+
+// Obtén los nodos de los campos de entrada y el botón "Ingresar Ahorro" por sus IDs
+const montoAhorroInput = document.getElementById('monto-ahorro');
+const objetivoAhorroInput = document.getElementById('objetivo-ahorro');
+const fechaMetaAhorroInput = document.getElementById('fecha-meta-ahorro');
+const botonIngresarAhorro = document.getElementById('ingresar-ahorro');
+
+// Agrega un evento clic al botón "Ingresar Ahorro"
+botonIngresarAhorro.addEventListener('click', function() {
+    // Captura los valores de los campos de entrada
+    const montoAhorro = montoAhorroInput.value;
+    const objetivoAhorro = objetivoAhorroInput.value;
+    const fechaMetaAhorro = fechaMetaAhorroInput.value;
+
+    // Muestra los valores en la consola
+    console.log("Monto de Ahorro:", montoAhorro);
+    console.log("Objetivo de Ahorro:", objetivoAhorro);
+    console.log("Fecha de Meta de Ahorro:", fechaMetaAhorro);
+});
 
 //mostramos un resumen final de cada instancia
 
 function mostrarResumen() {
   console.log("Monto Disponible:", montoDisponible);
+
   console.log("Resumen de Ingresos:", ingresos);
   console.log("Resumen de Egresos Fijos:", egresosFijos);
   console.log("Resumen de Egresos Variables:", egresosVariables);
@@ -243,12 +151,12 @@ function mostrarResumen() {
 //invocamos el menu para navegar dentro de las distintas opciones
 
 // function main() {
-//   let opcion;
-//   do {
-//     opcion = parseInt(prompt("Menú:\n1. Ingreso extra\n2. Egresos Fijos\n3. Egresos Variables\n4. Ahorro\n5. Finalizar"));
-//     switch (opcion) {
-//       case 1:
-//         ingresarIngresosExtra();
+  //   let opcion;
+  //   do {
+    //     opcion = parseInt(prompt("Menú:\n1. Ingreso extra\n2. Egresos Fijos\n3. Egresos Variables\n4. Ahorro\n5. Finalizar"));
+    //     switch (opcion) {
+      //       case 1:
+      //         ingresarIngresosExtra();
 //         break;
       // case 2:
       //   ingresarEgresosFijos();
@@ -259,16 +167,16 @@ function mostrarResumen() {
       // case 4:
       //   ingresarAhorro();
       //   break;
-    //   case 5:
-    //     console.log("Finalizando el programa.");
-    //     mostrarResumen();
-    //     break;
+      //   case 5:
+      //     console.log("Finalizando el programa.");
+      //     mostrarResumen();
+      //     break;
     //   default:
     //     console.log("Opción no válida. Inténtelo de nuevo.");
     // }
-
+    
     // creamos el bucle while y los condicionales necesarios en caso de que el usuario le quede saldo a favor, quede en 0 y si queda en negativo
-
+    
 //   } while (opcion !== 5 && montoDisponible > 0);
 
 //   if (montoDisponible > 0) {
@@ -276,41 +184,80 @@ function mostrarResumen() {
 //   } else if (montoDisponible < 0) {
 //     console.log("Has terminado con un saldo en negativo de $" + Math.abs(montoDisponible).toFixed(2));
 //   } else {
-//     console.log("Has gastado todo tu salario, tu saldo es $0.");
-//   }
-// }
+  //     console.log("Has gastado todo tu salario, tu saldo es $0.");
+  //   }
+  // }
+  
+  // main(); 
+  
+  
+  
+  // EMPIEZO A CAPTURAR EL DOM ----------------------------------------------------------------
+  
 
-// main(); 
+// Función para mostrar el formulario después de calcular el monto disponible
+  function mostrarFormulario() {
+    document.getElementById('ingreso-mensual').style.display = 'none';
+    document.getElementById('formulario').style.display = 'block';
+  }
+
+// Manejar el botón "Calcular Monto Disponible"
+  document.getElementById('calcular-monto').addEventListener('click', () => {
+    const montoDisponible = calcularMontoDisponible();
+    
+    mostrarFormulario(); // Mostrar el formulario después de calcular el monto
+  });
+
+
+
+// capturo el id salario del formulario y muestro en pantalla como en consola el valor del input ingresado en el formulario
+  function calcularMontoDisponible() {
+  let ingresoTotal = document.getElementById("salario")
+    ingresoTotal = ingresoTotal.value
+    console.log(ingresoTotal)
+
+  }
+
+
+  // ----------Funcion para el boton ACEPTAR--------------
 
 // Obtén el nodo del botón "Aceptar" por su ID
-const botonAceptar = document.getElementById('calcular-monto');
+  const botonAceptar = document.getElementById('calcular-monto');
+  
 
-// Agrega un evento click al botón "Aceptar"
-botonAceptar.addEventListener('click', function() {
-    // Captura los valores de los campos de texto
+  botonAceptar.addEventListener('click', function() {
     const salarioMensual = document.getElementById('salario').value;
     const nombreUsuario = document.getElementById('nombreUsuario').value;
-
-    // Obtén el nodo del elemento donde deseas mostrar la información
+    
+  // Obtén el nodo del elemento donde deseas mostrar la información
     const resultadoDiv = document.getElementById('resultado');
 
-    // Actualiza el contenido del elemento con la información capturada
+  // Actualiza el contenido del elemento con la información capturada
     resultadoDiv.textContent = `Salario Mensual: ${salarioMensual}, Nombre del Usuario: ${nombreUsuario}`;
 });
 
 
-// let ingresaExtra = document.getElementById("ingresar-ingreso-extra")
-// console.log(ingresaExtra)
-// ingresaExtra.addEventListener("change", () =>{
-//   console.log("detecto cambio")
-// } )
 
 
 
-document.getElementById('finalizar-btn').addEventListener('click', () => {
+document.getElementById('calcular-monto').addEventListener('click', () => {
   
-  mostrarResumen(); // Mostrar el formulario después de calcular el monto
+  calcularMontoDisponible(); // Mostrar el formulario después de calcular el monto
+  
 });
 
+document.getElementById('finalizar-btn').addEventListener('click', () => {
+   mostrarResumen();
+})
+
+document.getElementById('monto-extra').addEventListener
 
 
+// -------Incluyo libreria Luxon--------
+
+let fechaDiv = document.getElementById("fechaDiv")
+const DateTime = luxon.DateTime
+setInterval(()=>{
+let fechaAhora = DateTime.now()
+  fechaDiv.innerHTML = `${fechaAhora.toLocaleString(DateTime.TIME_WITH_SECONDS)}`
+},1000)
