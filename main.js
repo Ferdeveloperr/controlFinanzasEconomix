@@ -7,34 +7,12 @@ let egresosVariables = [];
 let ahorro = [];
 
 
-  
-  // REPLICAR Y SUSTITUIR RESTO DE INPUTS
 
 
 // Pide el salario mensual una sola vez y asigna el valor a montoDisponible
 montoDisponible = calcularMontoDisponible();
 
 
-// Función constructora para crear objetos de ingresos
-function Ingreso(monto, empresa, fechaCobro) {
-  this.monto = monto;
-  this.empresa = empresa;
-  this.fechaCobro = fechaCobro;
-}
-
-// Función constructora para crear objetos de egresos
-function Egreso(monto, concepto, fechaVencimiento) {
-  this.monto = monto;
-  this.concepto = concepto;
-  this.fechaVencimiento = fechaVencimiento;
-}
-
-// Función constructora para crear objetos de ahorro
-function Ahorro(monto, objetivo, fechaMeta) {
-  this.monto = monto;
-  this.objetivo = objetivo;
-  this.fechaMeta = fechaMeta;
-}
 
 
 
@@ -47,24 +25,48 @@ function Ahorro(monto, objetivo, fechaMeta) {
 
 // ---------PRIMER CAMPO DEL FORMULARIO----------------
 
+//arrays para elementos
+const ingresosExtrasArray = [];
+
+
+function crearIngresoExtra(monto, trabajo, fechaCobro) {
+  
+
+this.montoExtra = monto;
+       
+this.trabajoRealizado = trabajo;
+      
+this.fechaCobro = fechaCobro;
+  
+}
+
 // Obtén los nodos de los campos de entrada y el botón "Finalizar" por sus IDs
 const montoExtraInput = document.getElementById('monto-extra');
 const trabajoExtraInput = document.getElementById('trabajo-extra');
 const fechaCobroExtraInput = document.getElementById('fecha-cobro-extra');
 const botonIngresoExtra = document.getElementById('ingresar-ingreso-extra');
+const resultadoDosDiv = document.getElementById('resultadoIngreso');
 
-// Agrega un evento clic al botón "Finalizar"
+// Agrega un evento clic al botón "IngresoExtra"
 botonIngresoExtra.addEventListener('click', function() {
-    // Captura los valores de los campos de entrada
+    
     const montoExtra = montoExtraInput.value;
     const trabajoRealizado = trabajoExtraInput.value;
     const fechaCobro = fechaCobroExtraInput.value;
 
-    // Muestra los valores en la consola
+    
     console.log("Monto Extra:", montoExtra);
     console.log("Trabajo Realizado:", trabajoRealizado);
     console.log("Fecha de Cobro:", fechaCobro);
-});
+
+    // crearIngresoExtra() 
+    
+  // const array = [crearIngresoExtra];
+  // ingresosExtrasArray.push(array)
+
+  });
+
+  console.log(crearIngresoExtra())
 
 
 
@@ -72,6 +74,20 @@ botonIngresoExtra.addEventListener('click', function() {
 
 
 // ------- SEGUNDO CAMPO DEL FORMULARIO -----------
+
+// Arrays para elementos
+const egresoFijoArray = [];
+
+function crearEgresosExtra(montosFijos, descripcionesFijo, fechasFijo) {
+  return {
+
+montosFijo: montosFijos,
+       
+descripcionFijo: descripcionesFijo,
+      
+fechaFijo: fechasFijo
+  };
+} 
 
 // Obtén los nodos de los campos de entrada y el botón "Finalizar" por sus IDs
 const montoFijoInput = document.getElementById('monto-fijo');
@@ -81,20 +97,37 @@ const EgresoFijo = document.getElementById('ingresar-egreso-fijo')
 
 // Agrega un evento clic al botón "Finalizar"
 EgresoFijo.addEventListener('click', function() {
-    // Captura los valores de los campos de entrada
+    
     const montoFijo = montoFijoInput.value;
     const descripcionFijo = descripcionFijoInput.value;
     const fechaFijo = fechaFijoInput.value;
 
-    // Muestra los valores en la consola
+    
     console.log("Monto Fijo:", montoFijo);
     console.log("Descripción de Egreso Fijo:", descripcionFijo);
     console.log("Fecha de Compra de Egreso Fijo:", fechaFijo);
+
+
 });
 
 
 
 // -----------------------TERCER CAMPO DEL FORMULARIO--------------------
+
+// Array para elementos
+const egresosVariablesArray = [];
+
+function crearEgresosVariables(montosVariables, descripcionesVariables, fechasVariables){
+  return{
+
+    montoVariable: montosVariables,
+
+    descripcionVariable: descripcionesVariables,
+
+    fechaCompraVariable: fechasVariables
+
+  };
+}
 
 // Obtén los nodos de los campos de entrada y el botón "Ingresar Egreso Variable" por sus IDs
 const montoVariableInput = document.getElementById('monto-variable');
@@ -104,12 +137,12 @@ const botonIngresarEgresoVariable = document.getElementById('ingresar-egreso-var
 
 // Agrega un evento clic al botón "Ingresar Egreso Variable"
 botonIngresarEgresoVariable.addEventListener('click', function() {
-    // Captura los valores de los campos de entrada
+    
     const montoVariable = montoVariableInput.value;
     const descripcionVariable = descripcionVariableInput.value;
     const fechaCompraVariable = fechaVariableInput.value;
 
-    // Muestra los valores en la consola
+    
     console.log("Monto Variable:", montoVariable);
     console.log("Descripción de Egreso Variable:", descripcionVariable);
     console.log("Fecha de Compra de Egreso Variable:", fechaCompraVariable);
@@ -117,6 +150,21 @@ botonIngresarEgresoVariable.addEventListener('click', function() {
 
 
 // ----------------------------CUARTO CAMPO DEL FORMULARIO------------------------------
+
+// Arrays de elementos
+
+const ahorrosArrays = [];
+
+function crearAhorros(montosDeAhorro, objetivosDeAhorro, fechasMetaAhorro){
+  return{
+
+    montoAhorro: montosDeAhorro,
+
+    objetivoAhorro: objetivosDeAhorro,
+
+    fechaMetaAhorro: fechasMetaAhorro
+  };
+}
 
 // Obtén los nodos de los campos de entrada y el botón "Ingresar Ahorro" por sus IDs
 const montoAhorroInput = document.getElementById('monto-ahorro');
@@ -126,27 +174,49 @@ const botonIngresarAhorro = document.getElementById('ingresar-ahorro');
 
 // Agrega un evento clic al botón "Ingresar Ahorro"
 botonIngresarAhorro.addEventListener('click', function() {
-    // Captura los valores de los campos de entrada
+    
     const montoAhorro = montoAhorroInput.value;
     const objetivoAhorro = objetivoAhorroInput.value;
     const fechaMetaAhorro = fechaMetaAhorroInput.value;
 
-    // Muestra los valores en la consola
+    
     console.log("Monto de Ahorro:", montoAhorro);
     console.log("Objetivo de Ahorro:", objetivoAhorro);
     console.log("Fecha de Meta de Ahorro:", fechaMetaAhorro);
 });
 
-//mostramos un resumen final de cada instancia
+// --------------CREO OBJETOS PARA CADA SECCION DEL FORMULARIO------------------
 
-function mostrarResumen() {
-  console.log("Monto Disponible:", montoDisponible);
+// Función constructora para crear objetos de ingresos
+// function Ingreso(monto, empresa, fechaCobro) {
+//   this.monto = monto;
+//   this.empresa = empresa;
+//   this.fechaCobro = fechaCobro;
+// }
 
-  console.log("Resumen de Ingresos:", ingresos);
-  console.log("Resumen de Egresos Fijos:", egresosFijos);
-  console.log("Resumen de Egresos Variables:", egresosVariables);
-  console.log("Resumen de Ahorro:", ahorro);
-}
+// // Función constructora para crear objetos de egresos
+// function Egreso(monto, concepto, fechaVencimiento) {
+//   this.monto = monto;
+//   this.concepto = concepto;
+//   this.fechaVencimiento = fechaVencimiento;
+// }
+
+// // Función constructora para crear objetos de ahorro
+// function Ahorro(monto, objetivo, fechaMeta) {
+//   this.monto = monto;
+//   this.objetivo = objetivo;
+//   this.fechaMeta = fechaMeta;
+// }
+
+
+// function mostrarResumen() {
+//   console.log("Monto Disponible:", montoDisponible);
+
+//   console.log("Resumen de Ingresos:", ingresos);
+//   console.log("Resumen de Egresos Fijos:", egresosFijos);
+//   console.log("Resumen de Egresos Variables:", egresosVariables);
+//   console.log("Resumen de Ahorro:", ahorro);
+// }
 
 //invocamos el menu para navegar dentro de las distintas opciones
 
