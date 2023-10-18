@@ -61,12 +61,13 @@ botonIngresoExtra.addEventListener('click', function() {
 
     // crearIngresoExtra() 
     
-  // const array = [crearIngresoExtra];
-  // ingresosExtrasArray.push(array)
+  const nuevoIngresoExtra = new crearIngresoExtra(montoExtra, trabajoRealizado, fechaCobro);
+
+  ingresosExtrasArray.push(nuevoIngresoExtra);
 
   });
 
-  console.log(crearIngresoExtra())
+
 
 
 
@@ -79,14 +80,14 @@ botonIngresoExtra.addEventListener('click', function() {
 const egresoFijoArray = [];
 
 function crearEgresosExtra(montosFijos, descripcionesFijo, fechasFijo) {
-  return {
+  
 
-montosFijo: montosFijos,
+this.montosFijo = montosFijos;
        
-descripcionFijo: descripcionesFijo,
+this.descripcionFijo = descripcionesFijo;
       
-fechaFijo: fechasFijo
-  };
+this.fechaFijo = fechasFijo;
+  
 } 
 
 // Obtén los nodos de los campos de entrada y el botón "Finalizar" por sus IDs
@@ -118,15 +119,15 @@ EgresoFijo.addEventListener('click', function() {
 const egresosVariablesArray = [];
 
 function crearEgresosVariables(montosVariables, descripcionesVariables, fechasVariables){
-  return{
+  
 
-    montoVariable: montosVariables,
+    this.montoVariable = montosVariables;
 
-    descripcionVariable: descripcionesVariables,
+    this.descripcionVariable = descripcionesVariables;
 
-    fechaCompraVariable: fechasVariables
+    this.fechaCompraVariable = fechasVariables;
 
-  };
+  
 }
 
 // Obtén los nodos de los campos de entrada y el botón "Ingresar Egreso Variable" por sus IDs
@@ -156,14 +157,14 @@ botonIngresarEgresoVariable.addEventListener('click', function() {
 const ahorrosArrays = [];
 
 function crearAhorros(montosDeAhorro, objetivosDeAhorro, fechasMetaAhorro){
-  return{
+ 
 
-    montoAhorro: montosDeAhorro,
+    this.montoAhorro = montosDeAhorro;
 
-    objetivoAhorro: objetivosDeAhorro,
+    this.objetivoAhorro = objetivosDeAhorro;
 
-    fechaMetaAhorro: fechasMetaAhorro
-  };
+    this.fechaMetaAhorro = fechasMetaAhorro;
+  
 }
 
 // Obtén los nodos de los campos de entrada y el botón "Ingresar Ahorro" por sus IDs
@@ -184,6 +185,37 @@ botonIngresarAhorro.addEventListener('click', function() {
     console.log("Objetivo de Ahorro:", objetivoAhorro);
     console.log("Fecha de Meta de Ahorro:", fechaMetaAhorro);
 });
+
+
+// ------------CREO FUNCION PARA RESTAR EL SALARIO DE CADA VALOR INGRESADO-------------------
+
+
+function operacionMontoFinal() {
+
+  let salarioInicial = parseFloat(document.getElementById('salario').value)
+  let calcIngresoExtra = parseFloat(document.getElementById('monto-extra').value)
+  let calcEgresoExtra = parseFloat(document.getElementById('monto-fijo').value)
+  let caclEgresoVariable = parseFloat(document.getElementById('monto-variable').value)
+  let calcAhorro = parseFloat(document.getElementById('monto-ahorro').value)
+
+  let resultado = (salarioInicial + calcIngresoExtra) - ( + calcEgresoExtra + caclEgresoVariable + calcAhorro);
+  
+  
+  let resultadoFinal = document.getElementById('resultadoFinal');
+
+  // Actualiza el contenido del elemento con la información capturada
+    resultadoFinal.textContent = `Su monto disponible es ${resultado}`;
+    
+    
+  }
+  
+  
+  document.getElementById('finalizar-btn').addEventListener('click', () => {
+    operacionMontoFinal();
+    console.log(operacionMontoFinal())
+  
+  })
+  
 
 // --------------CREO OBJETOS PARA CADA SECCION DEL FORMULARIO------------------
 
@@ -273,7 +305,7 @@ botonIngresarAhorro.addEventListener('click', function() {
 
 // Manejar el botón "Calcular Monto Disponible"
   document.getElementById('calcular-monto').addEventListener('click', () => {
-    const montoDisponible = calcularMontoDisponible();
+    const montosDisponible = calcularMontoDisponible();
     
     mostrarFormulario(); // Mostrar el formulario después de calcular el monto
   });
@@ -284,7 +316,7 @@ botonIngresarAhorro.addEventListener('click', function() {
   function calcularMontoDisponible() {
   let ingresoTotal = document.getElementById("salario")
     ingresoTotal = ingresoTotal.value
-    console.log(ingresoTotal)
+
 
   }
 
@@ -316,9 +348,9 @@ document.getElementById('calcular-monto').addEventListener('click', () => {
   
 });
 
-document.getElementById('finalizar-btn').addEventListener('click', () => {
-   mostrarResumen();
-})
+// document.getElementById('finalizar-btn').addEventListener('click', () => {
+//    mostrarResumen();
+// })
 
 document.getElementById('monto-extra').addEventListener
 
@@ -331,3 +363,5 @@ setInterval(()=>{
 let fechaAhora = DateTime.now()
   fechaDiv.innerHTML = `${fechaAhora.toLocaleString(DateTime.TIME_WITH_SECONDS)}`
 },1000)
+
+
