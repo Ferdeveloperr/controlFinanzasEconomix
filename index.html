@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css"> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
     <title>Control de Finanzas Economix</title>
 </head>
 <body>
@@ -12,9 +13,13 @@
     <header>
         <h1>Control de Finanzas Economix</h1> 
         <div id="fechaDiv"></div>
+        <button id="obtenerDatos">cotizacion dolar</button>
+         <div id="resultadoApi"></div>
     </header>
     <main>
 
+        
+        
 
 
         <div id="ingreso-mensual"> 
@@ -28,6 +33,7 @@
 
 
         <div id="resultado"></div> 
+        <div id="resultadoIngreso"></div>
         <div id="resultadoFinal"></div>
 
 
@@ -43,6 +49,7 @@
                 <label for="fecha-cobro-extra">Fecha de Cobro:</label>
                 <input type="text" id="fecha-cobro-extra" placeholder="Ingrese la fecha de cobro, por ejemplo, dd/mm/aa">
                 <button id="ingresar-ingreso-extra">Ingresar saldo Extra</button> 
+                
 
                 <h2>Ingrese Egreso Fijo</h2>
                 <label for="monto-fijo">Monto Fijo:</label>
@@ -82,11 +89,18 @@
     </main>
 
 
+    <!-- ---Sweet alert-- -->
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js
+    "></script>
+    <!-- -- Luxon -- -->
     <script src="
     https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js
     "></script>
+    <script src="api.js"></script>
     <script src="main.js"></script>
     <script src="darkmode.js"></script>
+    <!-- -- bootstrap --  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
    
     

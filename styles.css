@@ -111,4 +111,17 @@ button {
     width: 100px;
     margin:auto
   }
-  
+
+
+
+ /*  estilos api */
+ 
+  #obtenerDatos {
+    margin-top: 15px;
+    font-size: 2vh;
+    background-color: green;
+  }
+
+ 
+
+

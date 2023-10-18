@@ -25,6 +25,8 @@ montoDisponible = calcularMontoDisponible();
 
 // ---------PRIMER CAMPO DEL FORMULARIO----------------
 
+
+
 //arrays para elementos
 const ingresosExtrasArray = [];
 
@@ -40,24 +42,24 @@ this.fechaCobro = fechaCobro;
   
 }
 
+
+
 // Obtén los nodos de los campos de entrada y el botón "Finalizar" por sus IDs
 const montoExtraInput = document.getElementById('monto-extra');
 const trabajoExtraInput = document.getElementById('trabajo-extra');
 const fechaCobroExtraInput = document.getElementById('fecha-cobro-extra');
 const botonIngresoExtra = document.getElementById('ingresar-ingreso-extra');
-const resultadoDosDiv = document.getElementById('resultadoIngreso');
+const resultadoIngresoDiv = document.getElementById('resultadoIngreso');
+
+const montoExtra = montoExtraInput.value;
+const trabajoRealizado = trabajoExtraInput.value;
+const fechaCobro = fechaCobroExtraInput.value;  
 
 // Agrega un evento clic al botón "IngresoExtra"
-botonIngresoExtra.addEventListener('click', function() {
-    
-    const montoExtra = montoExtraInput.value;
-    const trabajoRealizado = trabajoExtraInput.value;
-    const fechaCobro = fechaCobroExtraInput.value;
 
-    
-    console.log("Monto Extra:", montoExtra);
-    console.log("Trabajo Realizado:", trabajoRealizado);
-    console.log("Fecha de Cobro:", fechaCobro);
+
+
+   
 
     // crearIngresoExtra() 
     
@@ -65,7 +67,15 @@ botonIngresoExtra.addEventListener('click', function() {
 
   ingresosExtrasArray.push(nuevoIngresoExtra);
 
-  });
+
+  document.getElementById('ingresar-ingreso-extra').addEventListener('click', function() {
+
+    Swal.fire('Ingreso Exitoso')
+    
+  } )
+  
+
+
 
 
 
@@ -96,20 +106,21 @@ const descripcionFijoInput = document.getElementById('concepto-fijo');
 const fechaFijoInput = document.getElementById('fecha-vencimiento-fijo');
 const EgresoFijo = document.getElementById('ingresar-egreso-fijo')
 
+const montoFijo = montoFijoInput.value;
+const descripcionFijo = descripcionFijoInput.value;
+const fechaFijo = fechaFijoInput.value;
+
+
+// console.log("Monto Fijo:", montoFijo);
+// console.log("Descripción de Egreso Fijo:", descripcionFijo);
+// console.log("Fecha de Compra de Egreso Fijo:", fechaFijo);
+
 // Agrega un evento clic al botón "Finalizar"
-EgresoFijo.addEventListener('click', function() {
+document.getElementById('ingresar-egreso-fijo').addEventListener('click', function() {
     
-    const montoFijo = montoFijoInput.value;
-    const descripcionFijo = descripcionFijoInput.value;
-    const fechaFijo = fechaFijoInput.value;
+  Swal.fire('Ingreso Exitoso')
 
-    
-    console.log("Monto Fijo:", montoFijo);
-    console.log("Descripción de Egreso Fijo:", descripcionFijo);
-    console.log("Fecha de Compra de Egreso Fijo:", fechaFijo);
-
-
-});
+} );
 
 
 
@@ -205,16 +216,22 @@ function operacionMontoFinal() {
 
   // Actualiza el contenido del elemento con la información capturada
     resultadoFinal.textContent = `Su monto disponible es ${resultado}`;
-    
+    if(resultado > 0) {
+      console.log("Has terminado con saldo a favor de $" + resultado.toFixed(2));
+    } else if (resultado < 0) {
+      console.log("Has terminado con un saldo en negativo de $" + Math.abs(resultado).toFixed(2));
+    } else {
+      console.log("Has gastado todo tu salario, tu saldo es $0.");
+    }
     
   }
   
   
   document.getElementById('finalizar-btn').addEventListener('click', () => {
     operacionMontoFinal();
-    console.log(operacionMontoFinal())
+    console.log("fin")
   
-  })
+  }) 
   
 
 // --------------CREO OBJETOS PARA CADA SECCION DEL FORMULARIO------------------
@@ -305,8 +322,7 @@ function operacionMontoFinal() {
 
 // Manejar el botón "Calcular Monto Disponible"
   document.getElementById('calcular-monto').addEventListener('click', () => {
-    const montosDisponible = calcularMontoDisponible();
-    
+
     mostrarFormulario(); // Mostrar el formulario después de calcular el monto
   });
 
@@ -352,7 +368,6 @@ document.getElementById('calcular-monto').addEventListener('click', () => {
 //    mostrarResumen();
 // })
 
-document.getElementById('monto-extra').addEventListener
 
 
 // -------Incluyo libreria Luxon--------
