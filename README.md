@@ -1,8 +1,5 @@
-Aquí tienes un README que puedes utilizar para tu repositorio "controlFinanzasEconomix":
 
-markdown
-Copiar código
-# Control Finanzas Economix
+# CotizacionesYA
 
 ## Descripción
 Control Finanzas Economix es una aplicación web diseñada para consultar cotizaciones de manera rápida y ágil. Permite a los usuarios mantenerse al día con las fluctuaciones del mercado, facilitando la toma de decisiones informadas en sus finanzas personales.
