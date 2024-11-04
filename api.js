@@ -54,3 +54,7 @@ function mostrarResultado(data) {
 function mostrarError() {
     resultado.innerHTML = '<p>Ocurrió un error al obtener los datos de la API.</p>';
 }
+
+document.getElementById('btnActualizar').addEventListener('click', () => {
+    location.reload();
+});
